@@ -1,0 +1,31 @@
+@startuml
+
+:darkturo: as me
+
+() "Mechanical button" as HUMANTRIGGER
+() "iOS paired device (Bluetooth)" as BT
+() "HTTP REST/XML ClickTT Service" as HTTP1
+() "HTTP REST/JSon Toggl Service" as HTTP2
+
+HUMANTRIGGER - [flic button]
+
+node "iOS device" {
+   BT - [flic iOS application] 
+}
+
+cloud "Internet" {
+   node "Server in the cloud" {
+      HTTP1 - [ClickTT proxy] <<clickttd>>
+   }
+   node "http://toggl.com" {
+      HTTP2 - [toggl Service] <<toggl.com>>
+   }
+}
+
+[flic button] --> BT : sends a message to
+[flic iOS application] ..> me : emits a sound to acknowledge
+[flic iOS application] --> HTTP1 : sends an HTTP message
+[ClickTT proxy] --> HTTP2 : sends start/stop message
+me --> HUMANTRIGGER : clicks
+
+@enduml
