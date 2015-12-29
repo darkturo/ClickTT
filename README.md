@@ -17,7 +17,7 @@ but it requires the client to track the state.
 ClickTT integrates flick and toggle via a proxy service running in the web. 
 The idea is described in the following graphic:
 
-![ClickTT Overview](doc/images/clicktt-overview.png)
+![ClickTT Overview](https://www.dropbox.com/s/irfkp2fe1by6eor/clicktt-overview.png?dl=1)
 
 
 ### flic
