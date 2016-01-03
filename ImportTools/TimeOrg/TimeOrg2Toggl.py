@@ -19,18 +19,26 @@ def parseArgs(argv):
     parser.add_argument('-f', '--backup-file', action='store', type=str,
                         required=True, dest='backup', 
                         help="File conatining the backup with the TimeOrg data")
+    parser.add_argument('-o', '--csv-file', action='store', type=str,
+                        required=False, dest='csvFile', 
+                        help="Target file, where the script will store the CSV output. If nothing is specified, by default the program will use the default std output.")
     return parser.parse_args( argv )
 
-def migrateTimeOrgTimesToCSV(backup_file):
+def migrateTimeOrgTimesToCSV(backup_file, csv_file):
     sqliteQueryResult = extractTimesFromBackup( backup_file )
 
-    field_names = [START_DATE, START_TIME, DURATION]
-    togglCSVEmitter = csv.DictWriter(sys.stdout, field_names)
-    togglCSVEmitter.writeheader()
-    for (sdate, stime, duration) in sqliteQueryResult:
-        togglCSVEmitter.writerow({ START_DATE: sdate,
-                                   START_TIME: stime,
-                                   DURATION: duration})
+    csv_fh = sys.stdout
+    if csv_file:
+        csv_fh = open(csv_file, 'wb')
+
+    with csv_fh as fh:
+        field_names = [START_DATE, START_TIME, DURATION]
+        togglCSVEmitter = csv.DictWriter(fh, field_names)
+        togglCSVEmitter.writeheader()
+        for (sdate, stime, duration) in sqliteQueryResult:
+            togglCSVEmitter.writerow({ START_DATE: sdate,
+                                       START_TIME: stime,
+                                       DURATION: duration})
 
 def extractTimesFromBackup(backup_file):
     conn = sqlite3.connect( backup_file )
@@ -53,4 +61,4 @@ def extractTimesFromBackup(backup_file):
 if __name__ == "__main__":
     options = parseArgs(sys.argv[1:])
     
-    migrateTimeOrgTimesToCSV( options.backup )
+    migrateTimeOrgTimesToCSV( options.backup, options.csvFile )
