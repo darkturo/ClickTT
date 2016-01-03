@@ -39,11 +39,10 @@ $ ./generate_sample_db.sh
 This will generate the file "sample-db.timeorg-backup", which it can be used to
 generate a CSV file on the screen with using the TimeOrg2Toggl.py tool:
 
-$ ./TimeOrg2Toggl.py -f sample-db.timeorg-backup 
+$ ./TimeOrg2Toggl.py -f sample-db.timeorg-backup -u arturo@somewhere.com
 
 Or, if it is necessary to write it into a file, it is possible to execute this
 in this manner:
 
-$ python TimeOrg2Toggl.py -f sample-db.timeorg-backup -o prueba.csv
-
+$ python TimeOrg2Toggl.py -f sample-db.timeorg-backup -o prueba.csv -u arturo@somewhere.com
 
