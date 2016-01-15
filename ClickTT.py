@@ -1,3 +1,24 @@
+#   ClickTT models the behavior of a simple button for toggle so it can be used
+#   with flic.
+#   You can have access to the complete project here: 
+#                https://github.com/darkturo/ClickTT
+# 
+#   Copyright (C) 2016  Arturo Escudero
+#   
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# 
 import httplib
 import json
 import base64
@@ -7,9 +28,9 @@ import datetime
 # toggle, it will decide whether it needs to start or stop it, to finally
 # perform the desired action.
 def click(input, context):
-   config = { "api_token": "xxxxxxxxxxxxxxxxxxxxxxxxxxx",
-              "wid": 1929122,
-              "pid": 21921919 }
+   config = { "api_token": "xxxxxxxxxxxxxxxxxxxxx",
+              "wid": 199228,
+              "pid": 128281}
 
    toggl = TogglService(config)
 
